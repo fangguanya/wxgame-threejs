@@ -43,7 +43,7 @@ export default class Game {
     this.renderer = renderer
 
     window.camera = camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-    NAV.initCamera(90, 60, 800);
+    NAV.initCamera(90, 60, 1800);
 
     scene = new THREE.Scene();
 
@@ -82,7 +82,7 @@ export default class Game {
 
     NAV.initEvents();
     this.initOimoPhysics();
-    this.initRun()
+    this.initWalk()
   }
   /**
    * 创建角色相关
