@@ -6,7 +6,7 @@ import * as THREE from '../libs/threejs/three.min'
 var camPos = { h: 90, v: 60, distance: 400, automove: false };
 var mouse = { ox: 0, oy: 0, h: 0, v: 0, mx: 0, my: 0, down: false, over: false, moving: true, button: 0 };
 var vsize = { w: window.innerWidth, h: window.innerHeight }
-var center = { x: 0, y: 0, z: 0 };
+var center = new THREE.Vector3(0, 0, 0);
 var rayTest = null;
 
 export let initCamera = function (h, v, d) {
