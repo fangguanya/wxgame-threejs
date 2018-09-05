@@ -48,14 +48,14 @@ export default class Main {
       this.UI.updateRanking()
     })
 
-    // 创建网格
-    // this.Game.createMeshs().then(() => {
-    //   this.loop()
-    // })
-    this.loop()
+    this.render()
+    setInterval(this.update.bind(this), 1000 / 60);
   }
 
-  loop() {
+  update() {
+    this.Game.update()
+  }
+  render() {
     // 关闭了渲染器的自动清除 这里需要手动清除
     this.renderer.clear()
 
@@ -64,6 +64,6 @@ export default class Main {
     // 渲染UI
     this.UI.render()
 
-    window.requestAnimationFrame(this.loop.bind(this), canvas)
+    window.requestAnimationFrame(this.render.bind(this), canvas)
   }
 }

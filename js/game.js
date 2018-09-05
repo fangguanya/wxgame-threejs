@@ -17,7 +17,7 @@ var mats = {};
 
 // human
 var human;
-var nHuman = 6;
+var nHuman = 4;
 
 // oimo
 var world = null;
@@ -25,6 +25,7 @@ var Hmeshs = {};
 var Hbodys = {};
 var bodys = [];
 var meshs = [];
+var nBody = 40;
 
 var collisionGroupes = {};
 
@@ -118,6 +119,7 @@ export default class Game {
 
     world = new OIMO.World({ info: false, worldscale: 100 });
 
+    var ground = world.add({ size: [1000, 40, 1000], pos: [0, -18, 0], world: world });
     this.addStaticBox([1000, 40, 1000], [0, -18, 0], [0, 0, 0]);
 
     // make physics humans
@@ -138,7 +140,7 @@ export default class Game {
     // add random object
     var config = [1, 0.4, 0.2, collisionGroupes.group2, collisionGroupes.all];
     var x, y, z, w, h, d, t;
-    var i = 100;
+    var i = nBody;
 
     while (i--) {
       t = Math.floor(Math.random() * 2) + 1;
@@ -200,6 +202,7 @@ export default class Game {
 
     //update humans
     human.update();
+
     var bone, name;
     var mtx, mtx2;
     var pos = new THREE.Vector3(), quat = new THREE.Quaternion();
@@ -228,7 +231,6 @@ export default class Game {
         Hmeshs[name].quaternion.copy(quat);
       }
     }
-
     // update random object
     var x, y, z;
     var i = bodys.length;
@@ -305,7 +307,6 @@ export default class Game {
    * 渲染游戏
    */
   render() {
-    this.update()
     this.renderer.render(scene, camera)
   }
 }
