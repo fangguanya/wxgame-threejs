@@ -16,6 +16,7 @@ const loadTask = wx.loadSubpackage({
             },
             complete: function (res) {
                 console.log("加载分包完成2");
+                new Main()
             }
         })
         loadTask1 && loadTask1.onProgressUpdate(res => {
@@ -23,7 +24,6 @@ const loadTask = wx.loadSubpackage({
             console.log('已经下载的数据长度2', res.totalBytesWritten)
             console.log('预期需要下载的数据总长度2', res.totalBytesExpectedToWrite)
         })
-        new Main()
     },
     fail: function (res) {
         console.log("加载分包失败1");
