@@ -1,4 +1,14 @@
 {
     "deviceOrientation": "portrait",
-    "openDataContext": "open"
+    "openDataContext": "open",
+    "subpackages": [
+        {
+            "name": "sub",
+            "root": "images"
+        },
+        {
+            "name": "model",
+            "root": "models"
+        }
+    ]
 }

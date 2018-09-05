@@ -61,7 +61,7 @@ export default class UI {
   showRanking() {
     this.open.postMessage({
       type: 'friend',
-      key: 'score',
+      key: 'level',
       openId: 'oyJjl5dYt5dB4-jS5ifbsbToVYZ0'
     })
 
@@ -87,6 +87,10 @@ export default class UI {
    */
   render() {
     this.renderer.render(this.scene, this.camera)
+
+    let cvs = this.open.canvas.getContext('2d')
+    if(cvs.temp)
+      console.warn(`cvs.temp:${cvs.temp}`)
   }
   
 }

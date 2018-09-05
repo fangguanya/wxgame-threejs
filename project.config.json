@@ -8,8 +8,8 @@
 		"newFeature": true
 	},
 	"compileType": "game",
-	"libVersion": "2.0.2",
-	"appid": "touristappid",
+	"libVersion": "2.1.0",
+	"appid": "wx18f6eaa1bde1661b",
 	"projectname": "wxgame-threejs",
 	"isGameTourist": true,
 	"condition": {

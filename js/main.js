@@ -16,12 +16,13 @@ export default class Main {
     // canvas.getContext('webgl')
 
     // 渲染器  
-    this.renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
+    // this.renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
+    this.renderer = new THREE.WebGLRenderer({ canvas: canvas, precision: "mediump", antialias: true, alpha: true });
     this.renderer.shadowMap.enabled = true
     this.renderer.setSize(GameParams.width, GameParams.height)
-    this.renderer.setClearColor(0xFFFFFF, 1)
+    // this.renderer.setClearColor(0xFFFFFF, 1)
     // 设置设备像素比达到抗锯齿效果
-    this.renderer.setPixelRatio(GameParams.ratio)
+    // this.renderer.setPixelRatio(GameParams.ratio)
     // 由于使用多个不同的摄像机 这里关闭自动清除
     this.renderer.autoClear = false
 
@@ -29,7 +30,7 @@ export default class Main {
     this.UI = new UI(this.renderer)
 
     // 显示排行榜
-    this.UI.showRanking()
+    // this.UI.showRanking()
 
     // setTimeout(() => {
     //   this.UI.hideRanking()
@@ -48,15 +49,16 @@ export default class Main {
     })
 
     // 创建网格
-    this.Game.createMeshs().then(() => {
-      this.loop()
-    })
+    // this.Game.createMeshs().then(() => {
+    //   this.loop()
+    // })
+    this.loop()
   }
 
   loop() {
     // 关闭了渲染器的自动清除 这里需要手动清除
     this.renderer.clear()
-    
+
     // 渲染游戏场景
     this.Game.render()
     // 渲染UI
