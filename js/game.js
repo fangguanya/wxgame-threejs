@@ -1,4 +1,5 @@
 import * as THREE from '../libs/threejs/three.min'
+import * as LOADER from "../libs/threejs/ColladaLoader"
 import * as OIMO from '../libs/threejs/plugins/oimo.min'
 import { Human } from "./human";
 
@@ -17,6 +18,7 @@ var mats = {};
 
 // human
 var human;
+var mixer;
 var nHuman = 4;
 
 // oimo
@@ -96,6 +98,19 @@ export default class Game {
     human.zw = 1000;
     human.zh = 400;
     this.initWalk();
+
+    // 增加1个骨骼模型
+    let loader = new LOADER.ColladaLoader()
+    loader.load("models/collada/stormtrooper/stormtrooper.dae", collada => {
+      let animation = collada.animations
+      let avatar = collada.scene
+      avatar.scale.set(30, 30, 30);
+      mixer = new THREE.AnimationMixer(avatar)
+      let action = mixer.clipAction(animation[0]).play()
+      scene.add(avatar)
+    }, (err) => {
+      console.error(err)
+    })
   }
 
   initWalk() {
@@ -237,6 +252,8 @@ export default class Game {
     var mesh;
     var body;
 
+    var prevTick;
+
     while (i--) {
       body = bodys[i];
       mesh = meshs[i];
@@ -307,6 +324,14 @@ export default class Game {
    * 渲染游戏
    */
   render() {
+    if (!this.prevTick) {
+      this.prevTick = Date.now()
+    }
+    let now = Date.now()
+    if (mixer !== undefined) {
+      mixer.update((now - this.prevTick) / 1000);
+    }
     this.renderer.render(scene, camera)
+    this.prevTick = now
   }
 }
