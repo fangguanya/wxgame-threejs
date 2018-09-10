@@ -19,7 +19,7 @@ var mats = {};
 // human
 var human;
 var mixer;
-var nHuman = 4;
+var nHuman = 1
 
 // oimo
 var world = null;
@@ -27,7 +27,7 @@ var Hmeshs = {};
 var Hbodys = {};
 var bodys = [];
 var meshs = [];
-var nBody = 40;
+var nBody = 100;
 
 var collisionGroupes = {};
 
@@ -101,15 +101,13 @@ export default class Game {
 
     // 增加1个骨骼模型
     let loader = new LOADER.ColladaLoader()
-    loader.load("models/collada/stormtrooper/stormtrooper.dae", collada => {
+    loader.load("models/collada/stormtrooper/Wolf_dae.dae", collada => {
       let animation = collada.animations
       let avatar = collada.scene
-      avatar.scale.set(30, 30, 30);
+      avatar.scale.set(400, 400, 400);
       mixer = new THREE.AnimationMixer(avatar)
       let action = mixer.clipAction(animation[0]).play()
       scene.add(avatar)
-    }, (err) => {
-      console.error(err)
     })
   }
 
@@ -134,7 +132,7 @@ export default class Game {
 
     world = new OIMO.World({ info: false, worldscale: 100 });
 
-    var ground = world.add({ size: [1000, 40, 1000], pos: [0, -18, 0], world: world });
+    // var ground = world.add({ size: [1000, 40, 1000], pos: [0, -18, 0], world: world });
     this.addStaticBox([1000, 40, 1000], [0, -18, 0], [0, 0, 0]);
 
     // make physics humans
@@ -251,8 +249,6 @@ export default class Game {
     var i = bodys.length;
     var mesh;
     var body;
-
-    var prevTick;
 
     while (i--) {
       body = bodys[i];
